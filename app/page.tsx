@@ -56,7 +56,6 @@ const DataTable = () => {
   const [usersPerPage] = useState(5);
 
   useEffect(() => {
-    // Fetch user data from your API
     axios
       .get("http://localhost:5000/")
       .then((response) => {
@@ -69,14 +68,12 @@ const DataTable = () => {
 
   const handleEdit = (userId: string) => {
     setEditingId(userId);
-    // Set initial values for editing
     const userToEdit = users.find((user) => user._id === userId);
     setEditedData(userToEdit || {});
   };
 
   const handleDelete = async (userId: string) => {
     try {
-      // Send delete request to your delete user API
       await axios.delete(`http://localhost:5000/deleteCustomer/${userId}`);
       // Update local state by removing the deleted user
       setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
@@ -88,7 +85,6 @@ const DataTable = () => {
   const handleSave = async () => {
     if (editingId) {
       try {
-        // Send edited data to your update user API
         await axios.put(
           `http://localhost:5000/updateCustomer/${editingId}`,
           editedData
@@ -121,7 +117,6 @@ const DataTable = () => {
     <div className="container mx-auto mt-8">
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
-          {/* ... (header code remains the same) */}
           <tr>
             <th className="py-2 px-4 border-b">ID</th>
             <th className="py-2 px-4 border-b">Full Name</th>
@@ -210,10 +205,7 @@ const DataTable = () => {
 };
 
 import { z, ZodError } from "zod";
-import dynamic from "next/dynamic";
-const Select = dynamic(() => import("react-select"), { ssr: false });
 
-// Assuming you have API endpoints to fetch countries, states, cities, and languages
 const fetchCountries = () => axios.get("http://localhost:5000/countries");
 const fetchStates = (countryId: any) =>
   axios.get(`http://localhost:5000/states/${countryId}`);
@@ -245,7 +237,6 @@ const customerSchema = z.object({
   ),
 });
 
-// Assuming you have types for Country, State, City, and Language
 interface Country {
   label: string;
   value: string;

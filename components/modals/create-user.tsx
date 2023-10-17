@@ -8,7 +8,6 @@ import Select from "react-select";
 import { useModal } from "@/hooks/use-modal-store";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
-// Assuming you have API endpoints to fetch countries, states, cities, and languages
 const fetchCountries = () => axios.get("http://localhost:5000/countries");
 const fetchStates = (countryId: any) =>
   axios.get(`http://localhost:5000/states/${countryId}`);
